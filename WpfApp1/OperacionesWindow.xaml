@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfApp1.OperacionesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="OperacionesWindow" Height="450" Width="800">
+    <Window.Resources>
+        <!-- Estilo para el TextBox con marcador de posición -->
+        <Style TargetType="TextBox" x:Key="WatermarkTextBoxStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="2" />
+                                <TextBlock x:Name="Watermark" Text="{TemplateBinding Tag}" 
+                                           Visibility="Collapsed" 
+                                           Foreground="Gray"
+                                           Margin="5,0,0,0"
+                                           IsHitTestVisible="False"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsEnabled" Value="True"/>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Watermark" Property="Visibility" Value="Visible"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Margin="20">
+            <!-- Usar el estilo de TextBox con marcador de posición -->
+            <TextBox Style="{StaticResource WatermarkTextBoxStyle}" Tag="Tipo Documento" Margin="0 0 0 10"/>
+            <TextBox Style="{StaticResource WatermarkTextBoxStyle}" Tag="Número Documento" Margin="0 0 0 10"/>
+            <TextBox Style="{StaticResource WatermarkTextBoxStyle}" Tag="Placa" Margin="0 0 0 10"/>
+            <ComboBox Margin="0 0 0 10">
+                <ComboBoxItem IsEnabled="False">Selecciona un turno</ComboBoxItem>
+                <ComboBoxItem>Turno 1</ComboBoxItem>
+                <ComboBoxItem>Turno 2</ComboBoxItem>
+                <ComboBoxItem>Turno 3</ComboBoxItem>
+            </ComboBox>
+            <TextBox Style="{StaticResource WatermarkTextBoxStyle}" Tag="Nombre Conductor" Margin="0 0 0 10"/>
+            <TextBox Style="{StaticResource WatermarkTextBoxStyle}" Tag="Nombre Cliente" Margin="0 0 0 10"/>
+            <DatePicker Margin="0 0 0 10"/>
+            <TextBox Style="{StaticResource WatermarkTextBoxStyle}" Tag="Hora" Margin="0 0 0 10"/>
+            <TextBox Style="{StaticResource WatermarkTextBoxStyle}" Tag="Peso de Ingreso" Margin="0 0 0 10"/>
+            <Button Content="Guardar" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>
